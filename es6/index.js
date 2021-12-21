@@ -121,3 +121,6 @@ const calendar = {
     });
   },
 };
+
+// prototype chain
+// delegation pattern
