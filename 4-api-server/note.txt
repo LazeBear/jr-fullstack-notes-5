@@ -1,0 +1,17 @@
+-- package.json
+-- package-lock.json
+-- src
+  |-- index.js 入口文件 (server.js, app.js)
+  |-- routes.js (等同于/src/routes/index.js, 只存在一个)
+  |-- routes (每一个文件，就是一个router)
+      |-- index.js 注册所有router
+      |-- tasks.js 针对task这个资源相关的路径 (task.js)
+  |-- controllers 逻辑处理
+      |-- tasks.js 针对task这个资源相关的所有业务逻辑 （route handler）
+          task.controller.js
+          taskController.js
+  |-- models
+      |-- task.js task在数据库里的数据格式 （对数据格式的设计） (Task.js)
+  |-- middleware
+      |-- errorHandler
+  |-- utils (helper function)
