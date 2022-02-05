@@ -1,52 +1,30 @@
-const data = [];
-let id = 1;
+require('dotenv').config();
+const express = require('express');
+const helmet = require('helmet');
+const swaggerUi = require('swagger-ui-express');
+// const cors = require('./middleware/cors');
+const cors = require('cors');
+const morgan = require('morgan');
 
-function addTask({ description }) {
-  const task = {
-    id: id++,
-    description,
-    done: false,
-  };
-  data.push(task);
-  return task;
-}
+const router = require('./routes');
+const logger = require('./utils/logger');
+const swaggerDoc = require('./utils/swagger');
 
-function getAllTasks({ description }) {
-  if (description) {
-    const filteredData = data.filter((i) =>
-      i.description.includes(description)
-    );
-    return filteredData;
-  }
-  return data;
-}
+const PORT = process.env.PORT || 3000;
+const app = express();
 
-// id is Number type already
-function getTaskById(id) {
-  return data.find((task) => task.id === id);
-}
+// function cors({options}) {
+//   return (req, res, next) => { };
+// }
 
-// task must exist
-function updateTaskById(id, { done, description }) {
-  const task = data.find((i) => i.id === id);
-  if (done !== undefined) {
-    task.done = !!done;
-  }
-  if (description) {
-    task.description = description;
-  }
-  return task;
-}
+app.use(helmet());
+app.use(express.json());
+app.use(cors());
+app.use(morgan(process.env.NODE_ENV === 'dev' ? 'tiny' : 'combined'));
 
-function deleteTaskById(id) {
-  const index = data.findIndex((i) => i.id === id);
-  data.splice(index, 1);
-}
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use(router);
 
-module.exports = {
-  getAllTasks,
-  getTaskById,
-  updateTaskById,
-  deleteTaskById,
-  addTask,
-};
+app.listen(PORT, () => {
+  logger.info(`Server running on port ${PORT}`);
+});
