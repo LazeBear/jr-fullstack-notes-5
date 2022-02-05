@@ -60,3 +60,28 @@ promise
   .finally(() => {
     isLoading = false;
   });
+
+// syntax sugar
+// 如果出现await，一定需要加上async
+async function main() {
+  try {
+    const result = await promise;
+    const result1 = await foo(result);
+
+    console.log(1);
+  } catch (e) {
+    console.log(e);
+  }
+
+  try {
+    const result = await promise;
+  } catch (e) {}
+
+  const a = await 1;
+  // await Promise.resolve(1);
+}
+
+// Promise.all([promise, promise]);
+
+// Promise.resolve(1) => new Promise((res, rej) => res(1));
+// async () => {}

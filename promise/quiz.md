@@ -68,3 +68,29 @@ setTimeout(() => {
   });
 });
 ```
+
+4.
+
+```js
+async function foo() {
+  console.log(1);
+  await bar();
+  console.log(2);
+}
+
+async function bar() {
+  console.log(3);
+  const a = await 4;
+  console.log(a);
+}
+
+async function main() {
+  console.log(5);
+  await foo();
+  console.log(6);
+}
+
+main();
+```
+
+<!-- 5,1,3,6,4,2 -->
