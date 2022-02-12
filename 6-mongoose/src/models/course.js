@@ -22,6 +22,14 @@ const schema = new mongoose.Schema(
       type: Number,
       select: false,
     },
+    students: [
+      // mongoose.Schema.Types.ObjectId
+      { type: mongoose.Types.ObjectId, ref: 'Student' },
+    ],
+    // student: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: 'Student',
+    // },
     // code: {
 
     // }

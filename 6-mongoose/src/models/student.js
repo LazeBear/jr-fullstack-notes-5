@@ -37,5 +37,11 @@ module.exports = mongoose.model(
         msg: 'Invalid email format',
       },
     },
+    courses: [
+      {
+        type: String,
+        ref: 'Course',
+      },
+    ],
   })
 );

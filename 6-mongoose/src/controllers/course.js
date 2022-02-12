@@ -51,6 +51,7 @@ async function addCourse(req, res) {
     allowUnknown: true,
     stripUnknown: true,
   });
+  // check code uniqueness
   const course = new Course({ code, name, description });
   await course.save();
   res.status(201).json(course);
@@ -86,6 +87,7 @@ async function deleteCourseById(req, res) {
       error: 'course not found',
     });
   }
+  // delete student reference
   res.sendStatus(204);
 }
 
