@@ -20,6 +20,8 @@ module.exports = mongoose.model(
     lastName: {
       type: String,
       required: true,
+      minlength: 2,
+      maxlength: 10,
     },
     email: {
       type: String,

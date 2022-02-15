@@ -20,6 +20,7 @@ async function getAllCourses(req, res) {
   // db.courses.find()
   // query chain
   // Course.find().sort().limit()
+  // limit/skip
   const courses = await Course.find().exec();
   res.json(courses);
 }
